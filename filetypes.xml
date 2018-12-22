@@ -4,6 +4,7 @@
     <extensionMap>
       <mapping pattern="lolloeJLth" type="PLAIN_TEXT" />
       <mapping pattern="lollonuzqL" type="PLAIN_TEXT" />
+      <mapping ext="pem" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
 </application>
