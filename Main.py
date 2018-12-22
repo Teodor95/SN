@@ -1,6 +1,11 @@
 import sys
+import time
+
+import threading
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow  # Imported one more module
-from PyQt5.QtGui import QIcon
+
+from Client.Client import runClient
+from Server.Server import runServer
 
 
 class App(QMainWindow):
@@ -22,8 +27,14 @@ class App(QMainWindow):
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
-    sys.exit(app.exec_())
-    #prova deue asdasd
-asd
+    # app = QApplication(sys.argv)
+    # ex = App()
+    # sys.exit(app.exec_())
+
+    t1 = threading.Thread(target=runServer(), args=())
+    t2 = threading.Thread(target=runClient(), args=())
+
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
