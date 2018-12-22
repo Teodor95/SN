@@ -1,8 +1,7 @@
-import os
 import socket, ssl
 
 
-def runClient():
+def run_client():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         ssl_sock = ssl.wrap_socket(s,
@@ -13,6 +12,6 @@ def runClient():
         ssl_sock.send('hello ~MySSL !')
         print(ssl_sock.recv(4096))
         ssl_sock.close()
-        print("idio")
+        print("ciaoooo")
     except ssl.SSLError as err:
         print(err)
