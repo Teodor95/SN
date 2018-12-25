@@ -1,17 +1,16 @@
-import socket, ssl
+import random
+import asyncoro.disasyncoro as asyncoro
 
 
-def run_client():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ssl_sock = ssl.wrap_socket(s,
-                                   ca_certs="cert.pem",
-                                   cert_reqs=ssl.CERT_REQUIRED,
-                                   ssl_version=ssl.PROTOCOL_TLSv1)
-        ssl_sock.connect(('127.0.0.1', 5151))
-        ssl_sock.send('hello ~MySSL !')
-        print(ssl_sock.recv(4096))
-        ssl_sock.close()
-        print("ciaoooo")
-    except ssl.SSLError as err:
-        print(err)
+def client_proc(n, coro=None):
+    global msg_id
+    server = yield coro.locate('server_coro')
+    for x in range(3):
+        yield coro.suspend(random.uniform(0.5, 3))
+        msg_id += 1
+        server.send('%d: %d / %d' % (msg_id, n, x))
+
+
+msg_id = 0
+for i in range(10):
+    asyncoro.Coro(client_proc, i)
