@@ -1,8 +1,5 @@
-import sys
-import time
-
 import threading
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow  # Imported one more module
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 
 from Client.Client import runClient
 from Server.Server import runServer
